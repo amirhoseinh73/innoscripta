@@ -1,0 +1,8 @@
+.search-large {
+  background-image: url("../img/search.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  padding: 4rem 5rem;
+  border-radius: 2rem;
+}
