@@ -1,0 +1,59 @@
+version: '3'
+networks:
+  innoscripta_network:
+    driver: bridge
+services:
+  front:
+    build:
+      context: .
+      dockerfile: ./React/Dockerfile
+    image: innoscripta-website
+    container_name: innoscripta-website
+    depends_on:
+      - back
+    ports:
+      - 3000:3000
+    volumes:
+      - ./React/:/app
+      - /app/node_modules
+    restart: always
+    networks:
+      - innoscripta_network
+  back:
+    build:
+      context: .
+      dockerfile: ./Laravel/Dockerfile
+    image: innoscripta-api
+    container_name: innoscripta-api
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    volumes:
+      - ./Laravel/:/app
+      - /app/vendor
+    restart: always
+    networks:
+      - innoscripta_network
+  DB:
+    image: postgres:11.5-alpine
+    container_name: innoscripta-db
+    environment:
+      - POSTGRES_DB=innoscripta
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - 5435:5432
+    restart: always
+    networks:
+      - innoscripta_network
+  dbadmin:
+    image: adminer
+    container_name: innoscripta-dbadmin
+    depends_on:
+      - db
+    ports:
+      - 5050:8080
+    restart: always
+    networks:
+      - innoscripta
