@@ -19,6 +19,10 @@
 
   text-decoration: none;
   outline: none;
+
+  --tw-bg-opacity: 1;
+  --swiper-navigation-color: rgb(15 118 110 / var(--tw-bg-opacity));
+  --swiper-navigation-size: 2rem;
 }
 
 *:focus-visible {
@@ -27,4 +31,8 @@
 
 body {
   margin: 0;
+}
+
+img {
+  user-select: none;
 }
