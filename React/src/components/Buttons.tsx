@@ -1,10 +1,5 @@
 import { Link } from "react-router-dom"
-
-interface BtnInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: JSX.Element | string
-  isOutline: boolean
-  className?: string
-}
+import { BtnInterface, BtnLinkInterface } from "../@types/global"
 
 export const BtnPrimary = function ({ children, isOutline, className, ...htmlAttr }: BtnInterface) {
   return (
@@ -23,11 +18,6 @@ export const BtnPrimary = function ({ children, isOutline, className, ...htmlAtt
 
 BtnPrimary.defaultProps = {
   isOutline: false,
-}
-
-interface BtnLinkInterface extends BtnInterface {
-  href: string
-  classNameBtn?: string
 }
 
 export const BtnPrimaryLink = function ({

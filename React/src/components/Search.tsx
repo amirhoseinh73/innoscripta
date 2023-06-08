@@ -1,7 +1,7 @@
 import "../assets/css/search.css"
-import { SEARCH_BTN, SEARCH_PLACEHOLDER, SEARCH_TEXT } from "../helpers/text"
+import { SEARCH_BTN, SEARCH_PLACEHOLDER, SEARCH_TEXT } from "../helpers/Texts"
 import { BtnPrimary } from "./Buttons"
-import { InputFocus } from "./inputs"
+import { InputFocus } from "./Inputs"
 
 const Search = function () {
   return (

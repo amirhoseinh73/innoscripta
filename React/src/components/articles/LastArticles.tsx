@@ -1,4 +1,4 @@
-import { TEXT_ARTICLES } from "../../helpers/text"
+import { TEXT_ARTICLES } from "../../helpers/Texts"
 import { BtnPrimary } from "../Buttons"
 import { ArticleBig, ArticleSmall } from "./Articles"
 

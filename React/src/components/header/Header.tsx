@@ -1,6 +1,6 @@
 import LinkNav from "./LinkNav"
 import { BtnPrimaryLink } from "../Buttons"
-import { BTNS_LOGIN, NAV_HEADER } from "../../helpers/nav"
+import { BTNS_LOGIN, NAV_HEADER } from "../../helpers/Navs"
 
 const Header = function () {
   return (

@@ -1,8 +1,5 @@
-import { IMAGES } from "../../helpers/helper"
-
-interface ArticleInterface {
-  className?: string
-}
+import { ArticleInterface } from "../../@types/global"
+import { IMAGES } from "../../helpers/Images"
 
 export const ArticleBig = function (props: ArticleInterface) {
   return (

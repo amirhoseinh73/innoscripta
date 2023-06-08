@@ -1,4 +1,4 @@
-import { InputFocus } from "./inputs"
+import { InputFocus } from "./Inputs"
 
 const SignIn = function () {
   return (

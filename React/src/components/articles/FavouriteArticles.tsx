@@ -1,5 +1,4 @@
 import { ArticleBig } from "./Articles"
-import { TEXT_FAV_ARTICLES } from "../../helpers/text"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -8,6 +7,7 @@ import { Navigation } from "swiper"
 
 import "swiper/css"
 import "swiper/css/navigation"
+import { TEXT_FAV_ARTICLES } from "../../helpers/Texts"
 
 const FavouriteArticles = function () {
   const slides = [1, 2, 3, 4, 5, 6, 7, 8, 9]
