@@ -18,3 +18,26 @@ export const TEXT_COPYRIGHT = "Copyright © 2023 amirhossein hassani. All rights
 
 export const FOOTER_ABOUT_US =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultrices tristique tortor." as const
+
+export const STATIC_MESSAGES = {
+  ERROR: {
+    server: "Server Error! Please tty again later.",
+
+    emailEmpty: "Email is required!",
+    emailValidation: "Email format is wrong!",
+    firstname: "firstname is required!",
+    lastname: "lastname is required!",
+    passwordEmpty: "password can not be empty!",
+    passwordValidation: "password must be at least 6 character!",
+    confirmPasswordEmpty: "password confirmation is empty!",
+    confirmPasswordValidation: "password confirmation not match!",
+  },
+
+  SUCCESS: {
+    operation: "Operation success.",
+  },
+
+  INFO: {
+    loading: "Please wait...",
+  },
+} as const
