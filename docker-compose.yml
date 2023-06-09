@@ -26,7 +26,7 @@ services:
     image: innoscripta-api
     container_name: innoscripta-api
     depends_on:
-      - db
+      - DB
     ports:
       - 8000:8000
     volumes:
@@ -43,7 +43,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
     ports:
-      - 5435:5432
+      - 5432:5432
     restart: always
     networks:
       - innoscripta_network
@@ -51,9 +51,9 @@ services:
     image: adminer
     container_name: innoscripta-dbadmin
     depends_on:
-      - db
+      - DB
     ports:
       - 5050:8080
     restart: always
     networks:
-      - innoscripta
+      - innoscripta_network
