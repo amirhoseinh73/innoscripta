@@ -4,11 +4,11 @@ import SignUp from "../components/SignUp"
 
 const Register = function () {
   return (
-    <div className="container mx-auto">
+    <>
       <Header />
       <SignUp />
       <Copyright />
-    </div>
+    </>
   )
 }
 

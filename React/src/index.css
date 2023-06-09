@@ -23,6 +23,24 @@
   --tw-bg-opacity: 1;
   --swiper-navigation-color: rgb(15 118 110 / var(--tw-bg-opacity));
   --swiper-navigation-size: 2rem;
+
+  --color-alert-error-border: #f1aeb5;
+  --color-alert-success-border: #a3cfbb;
+  --color-alert-info-border: #9eeaf9;
+  --color-alert-warning-border: #ffe69c;
+  --color-alert-gray-border: #e9ecef;
+
+  --color-alert-error-bg: #f8d7da;
+  --color-alert-success-bg: #d1e7dd;
+  --color-alert-info-bg: #cff4fc;
+  --color-alert-warning-bg: #fff3cd;
+  --color-alert-gray-bg: #f8f9fa;
+
+  --color-alert-error-text: #b02a37;
+  --color-alert-success-text: #146c43;
+  --color-alert-info-text: #087990;
+  --color-alert-warning-text: #997404;
+  --color-alert-gray-text: #6c757d;
 }
 
 *:focus-visible {

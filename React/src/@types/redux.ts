@@ -13,3 +13,8 @@ export interface AuthAction {
   type: "SET_USER_INFO"
   payload: UserInfo
 }
+
+export interface ReduxReducers {
+  themeIsDark: boolean
+  userInfo: null | UserInfo
+}

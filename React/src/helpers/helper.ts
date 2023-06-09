@@ -1,6 +1,6 @@
 import { NumberRange } from "../@types/global"
 
-export const API_URL = import.meta.env.VITE_API_URL
+export const API_URL = import.meta.env.VITE_API_URL + "/graphql"
 
 export const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
@@ -24,7 +24,7 @@ export const html_loading = (loadingPercent: NumberRange<101>[number] = 100) => 
         right: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--bg-main);
+        background-color: #bababa88;
         z-index: 9999999999;
         display: flex;
         justify-content: center;
@@ -176,19 +176,9 @@ export const html_loading = (loadingPercent: NumberRange<101>[number] = 100) => 
 }
 
 export const append_and_get_loading = (loadingPercent: NumberRange<101>[number] = 100) => {
-  document.body.querySelector(".App")?.insertAdjacentHTML("beforeend", html_loading(loadingPercent))
+  document.body?.insertAdjacentHTML("beforeend", html_loading(loadingPercent))
   return document.querySelectorAll(".preLoaderSpinner")
 }
-
-export const RESTFUL_API_URL = {
-  USER: {
-    register: `${API_URL}/api/user/register`,
-    login: `${API_URL}/api/user/login`,
-    logout: `${API_URL}/api/user/logout`,
-    info: `${API_URL}/api/user`,
-    forgotPassword: `${API_URL}/api/user/forgot-password`,
-  },
-} as const
 
 export const setItem = (key: string, value: string) => localStorage.setItem(key, value)
 export const getItem = (key: string) => localStorage.getItem(key)

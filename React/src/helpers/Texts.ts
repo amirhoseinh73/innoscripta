@@ -21,7 +21,7 @@ export const FOOTER_ABOUT_US =
 
 export const STATIC_MESSAGES = {
   ERROR: {
-    server: "Server Error! Please tty again later.",
+    server: "Server Error! Please try again later.",
 
     emailEmpty: "Email is required!",
     emailValidation: "Email format is wrong!",
@@ -35,6 +35,8 @@ export const STATIC_MESSAGES = {
 
   SUCCESS: {
     operation: "Operation success.",
+    register: "Success Registeration.",
+    login: "You logged in successfully",
   },
 
   INFO: {

@@ -4,11 +4,11 @@ import SignIn from "../components/SignIn"
 
 const Login = function () {
   return (
-    <div className="container mx-auto">
+    <>
       <Header />
       <SignIn />
       <Copyright />
-    </div>
+    </>
   )
 }
 

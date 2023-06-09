@@ -5,15 +5,14 @@ import { BtnPrimary } from "./Buttons"
 import { InputFocus } from "./Inputs"
 import Eye from "./icons/Eye"
 import EyeSlash from "./icons/EyeSlash"
-import { RESTFUL_API_URL, emailRegex, setItem } from "../helpers/helper"
-import { ResponseLogin, anyObject } from "../@types/global"
+import { emailRegex } from "../helpers/helper"
+import { ResponseRegister, anyObject } from "../@types/global"
 import { PostData } from "../models/POST"
 import { useDispatch } from "react-redux"
 import { setUserInfo } from "../Redux/Actions/auth"
-
-export const ErrorComponent = function ({ text }: { text: string }) {
-  return <span className="text-red-600 text-xs font-medium">{text}</span>
-}
+import Alert from "./Alert/Alert"
+import { createUserBody } from "../models/User"
+import ErrorText from "./Alert/ErrorText"
 
 const SignUp = function () {
   const [isPassword, setIsPassword] = useState(true)
@@ -25,7 +24,7 @@ const SignUp = function () {
     email: "",
     password: "",
     passwordConfirm: "",
-    server: [""],
+    server: "",
   })
   const [successMsg, setSuccessMsg] = useState<string>("")
   const [submitData, setSubmitData] = useState<null | anyObject>(null)
@@ -43,23 +42,22 @@ const SignUp = function () {
   const submitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    setErrors({
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      server: [""],
-    })
-    setSuccessMsg("")
-
     const email = emailRef.current?.value
     const firstname = firstnameRef.current?.value
     const lastname = lastnameRef.current?.value
     const password = passwordRef.current?.value
     const passwordConfirm = passwordConfirmRef.current?.value
 
-    let currentErrors = { ...errors }
+    setSuccessMsg("")
+
+    let currentErrors = {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      server: "",
+    }
 
     if (!firstname) currentErrors = { ...currentErrors, firstname: STATIC_MESSAGES.ERROR.firstname }
     if (!lastname) currentErrors = { ...currentErrors, lastname: STATIC_MESSAGES.ERROR.lastname }
@@ -84,6 +82,7 @@ const SignUp = function () {
         passwordConfirm: STATIC_MESSAGES.ERROR.confirmPasswordValidation,
       }
 
+    setErrors(currentErrors)
     if (
       currentErrors.email ||
       currentErrors.firstname ||
@@ -91,12 +90,11 @@ const SignUp = function () {
       currentErrors.password ||
       currentErrors.passwordConfirm
     )
-      return setErrors(currentErrors)
+      return
 
     const data = {
       email: email,
-      firstname: firstname,
-      lastname: lastname,
+      name: firstname + " " + lastname,
       password: password,
       password_confirmation: passwordConfirm,
     }
@@ -104,41 +102,43 @@ const SignUp = function () {
     setSubmitData(data)
   }
 
-  const submitForm = async (data: anyObject) => {
+  const submitForm = async (data: string) => {
     setSubmitData(null)
     try {
-      // prettier-ignore
-      const respond = await PostData( RESTFUL_API_URL.USER.register, data ) as ResponseLogin
+      const respond = (await PostData(data)) as ResponseRegister
 
       //success
       formRef.current?.reset()
-      setSuccessMsg(respond.message)
+      setSuccessMsg(STATIC_MESSAGES.SUCCESS.register)
 
-      setItem("token", respond.data.token)
-      dispatch(setUserInfo(respond.data.user))
+      dispatch(setUserInfo(respond.data.createUser))
     } catch (err) {
-      if (Array.isArray(err)) return setErrors({ ...errors, server: err })
-
-      setErrors({ ...errors, server: [STATIC_MESSAGES.ERROR.server] })
+      setErrors({ ...errors, server: err as string })
     }
   }
 
   useEffect(() => {
     if (!submitData) return
 
-    submitForm(submitData)
+    const data = createUserBody(submitData.name, submitData.email, submitData.password)
+
+    submitForm(data)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitData])
 
   return (
-    <div className="relative flex flex-col justify-center h-[calc(100vh_-_7rem)] py-12 overflow-hidden">
+    <div className="relative flex flex-col justify-center h-[calc(100vh_-_7rem)] p-12 overflow-hidden">
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl ring-1 ring-teal-600 lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-teal-700 underline uppercase decoration-wavy">
           {SITE_NAME}
         </h1>
-        <form className="mt-6" onSubmit={submitRegister}>
+        <form ref={formRef} className="mt-6" onSubmit={submitRegister}>
+          <div className="px-2">
+            {errors && errors.server && <Alert type="error" message={errors.server} />}
+            {successMsg && <Alert type="success" message={successMsg} />}
+          </div>
           <section className="flex flex-wrap">
-            <div className="mb-3 px-2 w-1/2">
+            <div className="mb-3 px-2 w-full sm:w-1/2">
               <label htmlFor="firstname" className="block text-sm font-semibold text-gray-800">
                 Firstname
               </label>
@@ -147,10 +147,11 @@ const SignUp = function () {
                 id="firstname"
                 placeholder="amirhossein"
                 autoComplete="first_name"
+                ref={firstnameRef}
               />
-              {errors.firstname && <ErrorComponent text={errors.firstname} />}
+              {errors.firstname && <ErrorText text={errors.firstname} />}
             </div>
-            <div className="mb-3 px-2 w-1/2">
+            <div className="mb-3 px-2 w-full sm:w-1/2">
               <label htmlFor="lastname" className="block text-sm font-semibold text-gray-800">
                 Lastname
               </label>
@@ -159,8 +160,9 @@ const SignUp = function () {
                 id="lastname"
                 placeholder="hassani"
                 autoComplete="family_name"
+                ref={lastnameRef}
               />
-              {errors.lastname && <ErrorComponent text={errors.lastname} />}
+              {errors.lastname && <ErrorText text={errors.lastname} />}
             </div>
           </section>
           <div className="mb-2 px-2">
@@ -172,8 +174,9 @@ const SignUp = function () {
               autoComplete="email"
               id="email"
               placeholder="someone@innoscripta.com"
+              ref={emailRef}
             />
-            {errors.email && <ErrorComponent text={errors.email} />}
+            {errors.email && <ErrorText text={errors.email} />}
           </div>
           <div className="mb-2 px-2 relative">
             <label htmlFor="password" className="block text-sm font-semibold text-gray-800">
@@ -185,6 +188,7 @@ const SignUp = function () {
                 autoComplete="password"
                 id="password"
                 placeholder="*********"
+                ref={passwordRef}
               />
               <BtnPrimary
                 className="absolute right-1 bottom-1 z-10 h-8 w-8"
@@ -196,7 +200,7 @@ const SignUp = function () {
                 tabIndex={-1}
               />
             </div>
-            {errors.password && <ErrorComponent text={errors.password} />}
+            {errors.password && <ErrorText text={errors.password} />}
           </div>
           <div className="mb-2 px-2">
             <label htmlFor="password_confirm" className="block text-sm font-semibold text-gray-800">
@@ -208,6 +212,7 @@ const SignUp = function () {
                 autoComplete="new-password"
                 id="password_confirm"
                 placeholder="*********"
+                ref={passwordConfirmRef}
               />
               <BtnPrimary
                 className="absolute right-1 bottom-1 z-10 h-8 w-8"
@@ -219,7 +224,7 @@ const SignUp = function () {
                 tabIndex={-1}
               />
             </div>
-            {errors.passwordConfirm && <ErrorComponent text={errors.passwordConfirm} />}
+            {errors.passwordConfirm && <ErrorText text={errors.passwordConfirm} />}
           </div>
           <div className="mt-6 px-2">
             <BtnPrimary

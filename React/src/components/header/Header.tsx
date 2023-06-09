@@ -1,8 +1,13 @@
 import LinkNav from "./LinkNav"
 import { BtnPrimaryLink } from "../Buttons"
-import { BTNS_LOGIN, NAV_HEADER } from "../../helpers/Navs"
+import { NAV_HEADER, NAV_USER } from "../../helpers/Navs"
+import { useSelector } from "react-redux"
+import { ReduxReducers } from "../../@types/redux"
 
 const Header = function () {
+  const userInfo = useSelector((state: ReduxReducers) => state.userInfo)
+  const validateUserInfo = userInfo && Object.keys(userInfo).length
+
   return (
     <header className="py-4 px-4">
       <nav className="flex flex-row">
@@ -16,16 +21,34 @@ const Header = function () {
           )
         )}
 
-        <LinkNav
-          href={BTNS_LOGIN.signIn.route}
-          className="ml-auto mr-1"
-          children={BTNS_LOGIN.signIn.content}
-        />
-        <BtnPrimaryLink
-          href={BTNS_LOGIN.signUp.route}
-          className="mx-1"
-          children={BTNS_LOGIN.signUp.content}
-        />
+        {validateUserInfo ? (
+          <>
+            <BtnPrimaryLink
+              href={NAV_USER.dashboard.route}
+              className="ml-auto mr-1"
+              children={NAV_USER.dashboard.content}
+            />
+            <BtnPrimaryLink
+              href={NAV_USER.logout.route}
+              className="mx-1"
+              children={NAV_USER.logout.content}
+              isOutline
+            />
+          </>
+        ) : (
+          <>
+            <LinkNav
+              href={NAV_USER.signIn.route}
+              className="ml-auto mr-1"
+              children={NAV_USER.signIn.content}
+            />
+            <BtnPrimaryLink
+              href={NAV_USER.signUp.route}
+              className="mx-1"
+              children={NAV_USER.signUp.content}
+            />
+          </>
+        )}
       </nav>
     </header>
   )

@@ -1,36 +1,18 @@
-import React from "react"
 import ReactDOM from "react-dom/client"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import App from "./App.tsx"
+import { configureStore } from "@reduxjs/toolkit"
+import { Provider } from "react-redux"
+import { allReducers } from "./Redux/Reducers"
 import "./index.css"
-import NotFound404 from "./pages/NotFound404.tsx"
-import Login from "./pages/Login.tsx"
-import Register from "./pages/Register.tsx"
+import App from "./App"
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <NotFound404 />,
-    children: [
-      // {
-      //   path: "contact-us",
-      //   element: <ContactUs />,
-      // },
-    ],
-  },
-  {
-    path: "sign-in",
-    element: <Login />,
-  },
-  {
-    path: "sign-up",
-    element: <Register />,
-  },
-])
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+const store = configureStore({ reducer: allReducers })
+
+root.render(
+  <Provider store={store}>
+    <div className="container mx-auto">
+      <App />
+    </div>
+  </Provider>
 )

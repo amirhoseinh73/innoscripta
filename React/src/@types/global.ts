@@ -36,22 +36,46 @@ export type anyObject = { [key: string]: any }
 export type UserInfo = {
   id: number
   email: string
-  firstname: string
-  lastname: string
+  name: string
   created_at: string
-  updated_at: string
 }
 
 export interface ResponseAPI {
-  message: string
-  errors?: { [key: string]: string[] }
-  status?: "success" | "failed"
+  errors?: {
+    [key: string]: {
+      message: string
+      extensions?: {
+        validation: { [key: string]: string[] }
+      }
+    }
+  }
   data?: anyObject
+}
+
+export interface ResponseRegister extends ResponseAPI {
+  data: {
+    createUser: {
+      id: number
+      name: string
+      email: string
+      created_at: string
+    }
+  }
 }
 
 export interface ResponseLogin extends ResponseAPI {
   data: {
-    token: string
-    user: UserInfo
+    login: {
+      token: string
+      user: UserInfo
+    }
   }
 }
+
+export interface ResponseUserInfo extends ResponseAPI {
+  data: {
+    me: UserInfo
+  }
+}
+
+export type AlertType = "error" | "success" | "info" | "warning" | null

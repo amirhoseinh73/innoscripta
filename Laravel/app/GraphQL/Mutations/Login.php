@@ -25,6 +25,9 @@ final class Login
 
         $token = $user->createToken($args["device"])->plainTextToken;
 
-        return $token;
+        return (object)[
+            "token" => $token,
+            "user" => $user
+        ];
     }
 }

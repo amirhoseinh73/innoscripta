@@ -6,9 +6,17 @@ import { InputFocus } from "./Inputs"
 const Search = function () {
   return (
     <section className="search-large w-full my-8">
-      <h2 className="mb-3 font-semibold text-xl">{SEARCH_TEXT}</h2>
+      <label htmlFor="search" className="mb-3 font-semibold text-xl block">
+        {SEARCH_TEXT}
+      </label>
       <div className="flex flex-row">
-        <InputFocus type="text" placeholder={SEARCH_PLACEHOLDER} className="mr-2 w-full mt-0" />
+        <InputFocus
+          type="text"
+          placeholder={SEARCH_PLACEHOLDER}
+          className="mr-2 w-full !mt-0"
+          autoComplete="search"
+          id="search"
+        />
         <BtnPrimary children={SEARCH_BTN} />
       </div>
     </section>

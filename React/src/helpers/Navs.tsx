@@ -24,7 +24,7 @@ export const NAV_HEADER = [
   },
 ]
 
-export const BTNS_LOGIN = {
+export const NAV_USER = {
   signIn: {
     route: "/sign-in",
     content: "Sign in",
@@ -32,6 +32,14 @@ export const BTNS_LOGIN = {
   signUp: {
     route: "/sign-up",
     content: "Sign up",
+  },
+  dashboard: {
+    route: "/dashboard",
+    content: "dashboard",
+  },
+  logout: {
+    route: "/logout",
+    content: "logout",
   },
 } as const
 
