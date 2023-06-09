@@ -13,31 +13,33 @@ export const GetData = async <T extends ResponseAPI>(
 
   const fetchParams: RequestInit = {
     headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
       Accept: "application/json",
       Authorization: enableToken ? "Bearer " + getItem("token") : "",
     },
   }
   if (headers) fetchParams.headers = headers
 
-  return fetch(url /*+ params*/, fetchParams)
+  return fetch(url, fetchParams)
     .then(response => response.json() as Promise<T>)
     .then(respond => {
       //failed
-      if (respond.errors || respond.status === "failed") {
-        const serverErrors = [respond.message]
-        for (const key in respond.errors) {
-          serverErrors.push(respond.errors[key][0])
-        }
-        throw serverErrors
+      if (respond.errors) {
+        const firstSpecificErr = respond.errors[0].extensions?.validation
+
+        if (firstSpecificErr) for (const key in firstSpecificErr) throw firstSpecificErr[key]
+
+        throw respond.errors[0]["message"]
       }
 
       //success
-      if (respond.status === "success") return respond
-
-      throw [STATIC_MESSAGES.ERROR.server]
+      return respond
     })
     .catch(err => {
-      throw err
+      if (err) throw err
+
+      throw STATIC_MESSAGES.ERROR.server
     })
     .finally(() => preLoader && preLoader.length && preLoader.forEach(loader => loader.remove()))
 }

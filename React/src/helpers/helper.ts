@@ -1,6 +1,7 @@
 import { NumberRange } from "../@types/global"
 
 export const API_URL = import.meta.env.VITE_API_URL + "/graphql"
+export const API_URL_NYT = import.meta.env.VITE_API_URL + "/api/articles/nyt"
 
 export const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
@@ -182,3 +183,19 @@ export const append_and_get_loading = (loadingPercent: NumberRange<101>[number] 
 
 export const setItem = (key: string, value: string) => localStorage.setItem(key, value)
 export const getItem = (key: string) => localStorage.getItem(key)
+
+export function sliceIntoChunks(str: string, chunkSize: number) {
+  const words = str.split(" ")
+  const noEmptyStrsArr = words.filter(item => item.length > 0)
+
+  if (chunkSize > noEmptyStrsArr.length) return str
+
+  //   const res = []
+  //   for (let i = 0; i < noEmptyStrsArr.length; i += chunkSize) {
+  const chunk = noEmptyStrsArr.slice(0, chunkSize)
+  // res.push(chunk)
+  //   }
+  const res = chunk
+
+  return res.join(" ") + "..."
+}

@@ -1,14 +1,14 @@
 import authReducer from "./auth"
 import { combineReducers } from "redux"
-import themeReducer from "./theme"
 import { ReduxReducers } from "../../@types/redux"
+import articleNytReducer from "./articleNYT"
 
 type CombineReduxReducers = {
   [key in keyof ReduxReducers]: any
 }
 
 const allReducersList: CombineReduxReducers = {
-  themeIsDark: themeReducer,
+  articleNYT: articleNytReducer,
   userInfo: authReducer,
 }
 

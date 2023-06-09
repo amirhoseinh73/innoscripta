@@ -1,12 +1,8 @@
-import { UserInfo } from "./global"
+import { ResponseNYT, UserInfo } from "./global"
 
 export interface ReduxReducers {
-  themeIsDark: boolean
+  articleNYT: [] | ResponseNYT["response"]["docs"]
   userInfo: null | UserInfo
-}
-
-export interface SwitchThemeAction {
-  type: "IS_DARK" | "IS_LIGHT"
 }
 
 export interface AuthAction {
@@ -14,7 +10,7 @@ export interface AuthAction {
   payload: UserInfo
 }
 
-export interface ReduxReducers {
-  themeIsDark: boolean
-  userInfo: null | UserInfo
+export interface ArticleNytAction {
+  type: "SET_ARTICLE_NYT"
+  payload: ResponseNYT["response"]["docs"]
 }

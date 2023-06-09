@@ -11,6 +11,10 @@ export interface BtnLinkInterface extends BtnInterface {
 
 export interface ArticleInterface {
   className?: string
+  date: string
+  title: string
+  content: string
+  image?: string
 }
 
 export interface NavItemInterface {
@@ -75,6 +79,20 @@ export interface ResponseLogin extends ResponseAPI {
 export interface ResponseUserInfo extends ResponseAPI {
   data: {
     me: UserInfo
+  }
+}
+export interface ResponseNYT extends ResponseAPI {
+  status: string
+  response: {
+    docs: {
+      abstract: string
+      document_type: string
+      lead_paragraph: string
+      news_desk: string
+      pub_date: string
+      snippet: string
+      source: string
+    }[]
   }
 }
 

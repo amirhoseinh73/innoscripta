@@ -8,9 +8,12 @@ import { Navigation } from "swiper"
 import "swiper/css"
 import "swiper/css/navigation"
 import { TEXT_FAV_ARTICLES } from "../../helpers/Texts"
+import { useSelector } from "react-redux"
+import { ReduxReducers } from "../../@types/redux"
 
 const FavouriteArticles = function () {
-  const slides = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const getArticleData = useSelector((state: ReduxReducers) => state.articleNYT)
+
   return (
     <section className="my-8 bg-gray-200 px-6 pt-6 pb-12">
       <div className="mr-auto">
@@ -45,9 +48,16 @@ const FavouriteArticles = function () {
         navigation={true}
         modules={[Navigation]}
         className="mt-10">
-        {slides.map(item => (
-          <SwiperSlide key={item} className="flex justify-center shadow-lg h-auto overflow-hidden">
-            {<ArticleBig className="!w-full !pr-0" />}
+        {getArticleData.map((item, idx) => (
+          <SwiperSlide key={idx} className="flex justify-center shadow-lg h-auto overflow-hidden">
+            {
+              <ArticleBig
+                content={item.lead_paragraph}
+                date={item.pub_date}
+                title={item.abstract}
+                className="!w-full !pr-0"
+              />
+            }
           </SwiperSlide>
         ))}
       </Swiper>
