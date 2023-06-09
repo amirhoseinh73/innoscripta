@@ -14,7 +14,7 @@ const LastArticles = function () {
       </div>
       <div className="flex flex-row flex-wrap mt-8">
         <ArticleBig />
-        <article className="w-1/2 pl-2">
+        <article className="w-full md:w-1/2 mb-2 md:mb-0 md:pl-2">
           <div className="shadow-lg p-4 flex flex-col rounded-lg justify-between h-full bg-gray-50">
             <ArticleSmall />
             <ArticleSmall />

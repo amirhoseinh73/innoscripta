@@ -11,7 +11,7 @@ const store = configureStore({ reducer: allReducers })
 
 root.render(
   <Provider store={store}>
-    <div className="container mx-auto">
+    <div className="container mx-auto px-2">
       <App />
     </div>
   </Provider>

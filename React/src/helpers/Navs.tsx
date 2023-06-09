@@ -6,14 +6,8 @@ import Phone from "../components/icons/Phone"
 import Telegram from "../components/icons/Telegram"
 import Twitter from "../components/icons/Twitter"
 import Youtube from "../components/icons/Youtube"
-import { IMAGES } from "./Images"
 
 export const NAV_HEADER = [
-  {
-    route: "/",
-    content: IMAGES.logo,
-    alt: "logo",
-  },
   {
     route: "/contact-us",
     content: "Contact Us",

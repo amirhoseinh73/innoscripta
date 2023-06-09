@@ -24,12 +24,30 @@ const FavouriteArticles = function () {
         pagination={{
           clickable: true,
         }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+        }}
         navigation={true}
         modules={[Navigation]}
         className="mt-10">
         {slides.map(item => (
           <SwiperSlide key={item} className="flex justify-center shadow-lg h-auto overflow-hidden">
-            {<ArticleBig className="w-full !pr-0" />}
+            {<ArticleBig className="!w-full !pr-0" />}
           </SwiperSlide>
         ))}
       </Swiper>

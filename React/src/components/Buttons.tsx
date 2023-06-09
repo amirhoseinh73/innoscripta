@@ -39,3 +39,15 @@ export const BtnPrimaryLink = function ({
 BtnPrimaryLink.defaultProps = {
   isOutline: false,
 }
+
+export const BtnTransparent = function ({ children, className, ...htmlAttr }: BtnInterface) {
+  return (
+    <button
+      type="button"
+      className={`px-2 py-1 transition-all bg-transparent text-teal-700 hover:text-teal-500"
+       ${className ?? ""}`}
+      {...htmlAttr}>
+      {children}
+    </button>
+  )
+}

@@ -3,7 +3,7 @@ import { IMAGES } from "../../helpers/Images"
 
 export const ArticleBig = function (props: ArticleInterface) {
   return (
-    <article className={`w-1/2 pr-2 ${props.className ?? ""}`}>
+    <article className={`w-full md:w-1/2 mb-2 md:mb-0 md:pr-2 ${props.className ?? ""}`}>
       <div className="shadow-lg p-4 rounded-lg h-full bg-gray-50">
         <img src={IMAGES.logo} alt="article" className="w-full h-64 rounded-2xl mb-4 shadow-2xl" />
         <time className="text-right mb-4 block">July 06, 2023</time>

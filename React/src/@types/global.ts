@@ -1,6 +1,6 @@
 export interface BtnInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element | string
-  isOutline: boolean
+  isOutline?: boolean
   className?: string
 }
 

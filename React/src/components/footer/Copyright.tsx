@@ -5,8 +5,8 @@ import { TEXT_COPYRIGHT } from "../../helpers/Texts"
 const Copyright = function () {
   return (
     <footer className="flex justify-between flex-wrap py-2 border-t border-gray-300">
-      <p className="text-gray-700 text-xs">{TEXT_COPYRIGHT}</p>
-      <ul className="list-none flex flex-wrap text-gray-700 text-sm">
+      <p className="text-gray-700 text-xs order-4 mt-2 lg:order-1">{TEXT_COPYRIGHT}</p>
+      <ul className="list-none flex flex-wrap text-gray-700 text-sm order-2 mt-2">
         {NAV_COPYRIGHT.map((item, idx) => (
           <li key={idx} className={idx !== 0 ? "ml-12" : ""}>
             <Link className="block" to={item.route}>
@@ -15,7 +15,7 @@ const Copyright = function () {
           </li>
         ))}
       </ul>
-      <ul className="list-none flex flex-wrap text-gray-700 text-sm">
+      <ul className="list-none flex flex-wrap text-gray-700 text-sm order-3 mt-2">
         {SOCIAL_MEDIA.map((item, idx) => (
           <li key={idx} className="mr-3 flex justify-center items-center">
             <Link className="block text-gray-600 w-4 h-4" to={item.route}>
