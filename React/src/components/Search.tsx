@@ -5,7 +5,7 @@ import { BtnPrimary } from "./Buttons"
 import { InputFocus } from "./Inputs"
 import { useSelector } from "react-redux"
 import { ReduxReducers } from "../@types/redux"
-import { ArticleBig, ArticleSmall } from "./articles/Articles"
+import { ArticleSmall } from "./articles/Articles"
 import { ResponseNYT } from "../@types/global"
 
 const Search = function () {
@@ -30,10 +30,6 @@ const Search = function () {
         art.lead_paragraph.toLocaleLowerCase().includes(`${searchVal.toLocaleLowerCase()}`) ||
         art.pub_date.toLocaleLowerCase().includes(`${searchVal.toLocaleLowerCase()}`)
     )
-    console.log(searchVal)
-
-    console.log(resArt)
-
     if (!resArt) return setSearchResult([])
 
     setSearchResult(resArt)

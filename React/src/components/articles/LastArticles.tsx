@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { TEXT_ARTICLES } from "../../helpers/Texts"
 import { API_URL_NYT } from "../../helpers/helper"
 import { GetData } from "../../models/GET"
@@ -22,7 +22,8 @@ const LastArticles = function () {
 
       if (data.status !== "OK") return setArticleData([])
 
-      setArticleData(data.response.docs)
+      const last4articles = data.response.docs.slice(0, 4)
+      setArticleData(last4articles)
 
       dispatch(setArticleNYT(data.response.docs))
     } catch {
@@ -31,7 +32,7 @@ const LastArticles = function () {
   }
 
   useEffect(() => {
-    if (getArticleData && getArticleData.length) return setArticleData(getArticleData)
+    if (getArticleData && getArticleData.length) return setArticleData(getArticleData.slice(0, 4))
     nytArticles()
   }, [])
 
@@ -58,12 +59,13 @@ const LastArticles = function () {
             {articleData &&
               articleData.length &&
               articleData.map((article, idx) => {
-                if (idx > 2) return <></>
+                if (idx === 0) return <React.Fragment key={idx} />
                 return (
                   <ArticleSmall
                     content={article.lead_paragraph}
                     date={article.pub_date}
                     title={article.abstract}
+                    key={idx}
                   />
                 )
               })}
