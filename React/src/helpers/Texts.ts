@@ -1,7 +1,7 @@
 export const SITE_NAME = "innoscripta" as const
 
 export const SEARCH_TEXT = "Search for articles you like:" as const
-export const SEARCH_PLACEHOLDER = "Search articles..." as const
+export const SEARCH_PLACEHOLDER = "Please type more than 3 character to search articles..." as const
 export const SEARCH_BTN = "Search" as const
 
 export const TEXT_ARTICLES = {
